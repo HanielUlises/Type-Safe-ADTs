@@ -9,10 +9,10 @@ template<class... Ts> overload(Ts...) -> overload<Ts...>;
 struct Expr {
     using Variant = std::variant<
         int,                    
-        struct Add { Expr left; Expr right; },   // Suma:     left + right
-        struct Sub { Expr left; Expr right; },   // Resta:    left - right
-        struct Mul { Expr left; Expr right; },   // Multi:    left * right
-        struct Neg { Expr expr; }                // Negativo: -expr
+        struct Add { Expr left; Expr right; },   // Sum:     left + right
+        struct Sub { Expr left; Expr right; },   // Subtraction:    left - right
+        struct Mul { Expr left; Expr right; },   // Product:    left * right
+        struct Neg { Expr expr; }                // Negation: -expr
     >;
 
     Variant data;
@@ -50,8 +50,8 @@ int main() {
         Expr::Neg{ Expr::Sub{ Expr(4), Expr(1) } }
     };
 
-    std::cout << "Expresion: " << to_string(expr) << "\n";
-    std::cout << "Resultado: " << eval(expr) << "\n";
+    std::cout << "Expression: " << to_string(expr) << "\n";
+    std::cout << "Result: " << eval(expr) << "\n";
 
     return 0;
 }
