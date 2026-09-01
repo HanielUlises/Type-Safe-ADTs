@@ -14,6 +14,11 @@ struct overload_set : A, B {
 #elifdef VARIADIC
 template <typename... Fs>
 struct overload_set : Fs... {
+    template<typename... Xs>
+    constexpr overload_set(Xs &&...xs) 
+        : Fs{std::forward<Xs>(xs)}...
+    {}
+
     using Fs::operator()...;
 };
 #endif
