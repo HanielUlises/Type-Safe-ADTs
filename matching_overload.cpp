@@ -17,6 +17,26 @@ struct foo_char {
 
 using foo = overload_set<foo_float<float>, foo_char<char>>;
 
+void example0(std::variant<int, float> &v) {
+    std::cout << "`v` contains: ";
+    struct visitor {
+        void operator()(int) {std::cout << "int";}
+        void operator()(float) {std::cout << "float";}
+    };
+
+    std::visit(visitor{}, v);
+    std::cout << '\n';
+}
+
+void example1(std::variant<int,float> &v) {
+    std::cout << "`v` contains: ";
+
+    match([](int) {std::cout << "int";},
+          [](float) {std::cout << "float";})(v);
+
+    std::cout << '\n';
+}
+
 int main() {
     foo f{
         foo_float<float>{},
