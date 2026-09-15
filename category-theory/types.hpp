@@ -1,10 +1,7 @@
+#include <concepts>
+
 template<class T>
 void unit(T) {}
-
-enum bool {
-    true,
-    false
-};
 
 template<class T>
 struct mempty;
