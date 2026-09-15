@@ -46,9 +46,14 @@ struct Semigroup {
     }
 };
 
-
-
 #if defined(TEST1)
+template<typename... Args>
+struct Sum {
+    auto operator()(Args ... args) {
+        return (... + args);
+    }
+};
+
 struct Add {
     int operator()(int a, int b) const {
         return a + b;
