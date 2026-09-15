@@ -5,6 +5,12 @@
 #include <concepts>
 #include <set>
 
+template <typename T, typename Op>
+concept Associativity = requires(T a, T b, T c, Op op) {
+    op(a, op(b, c));
+    op(op(a, b), c);
+};
+
 template<class T>
 void unit(T) {}
 
@@ -19,7 +25,8 @@ concept Monoid = requires (M m) {
     { mappend(m, m) } -> std::same_as<M>;
 };
 
-template <typename T, typename BinOp>
+template<typename T, typename BinOp>
+requires Associativity<BinOp, T>
 struct Semigroup {
     std::set<T> S;
     BinOp op;
@@ -27,6 +34,11 @@ struct Semigroup {
     T combine(T &a, T &b) {
         return op(a, b);
     }
+};
+
+template<typename T, typename Op>
+struct Magma {
+
 };
 
 #if defined(TEST1)
