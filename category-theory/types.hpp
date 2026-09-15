@@ -25,6 +25,16 @@ concept Monoid = requires (M m) {
     { mappend(m, m) } -> std::same_as<M>;
 };
 
+template<typename T, typename Op>
+struct Magma {
+    std::set<T> S;
+    Op op;
+
+    T combine(T &a, T &b) {
+        return op(a, b);
+    }
+};
+
 template<typename T, typename BinOp>
 requires Associativity<BinOp, T>
 struct Semigroup {
@@ -36,10 +46,7 @@ struct Semigroup {
     }
 };
 
-template<typename T, typename Op>
-struct Magma {
 
-};
 
 #if defined(TEST1)
 struct Add {
