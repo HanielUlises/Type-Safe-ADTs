@@ -6,4 +6,4 @@ std::optional<int> s0;
 std::optional<int> s1{42};
 
 auto d0 = s0; // unset `optional<int>`
-auto d1 = s1; // set `optional<int>`, value `42`
+auto d1 = s1; // set `optional<int>`, value `42
